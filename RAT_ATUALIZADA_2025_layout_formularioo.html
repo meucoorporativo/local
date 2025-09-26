@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAT ATUALIZADA 2025 - Formulário Editável</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background:#f7f7f7; }
+    table { border-collapse: collapse; width: 100%; background: #fff; }
+    td, th { border: 1px solid #000; padding: 6px; font-size: 13px; vertical-align: top; }
+    th { background: #d9e1f2; text-align: center; }
+    input, textarea { width: 98%; border: none; font-size: 13px; }
+    textarea { height: 60px; resize: vertical; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .header img { height: 40px; }
+    .satisfacao td { text-align: center; font-weight: bold; }
+    .satisfacao label { display: block; padding: 6px; color: #fff; border-radius: 4px; cursor: pointer; }
+    .satisfacao input { margin-top: 5px; }
+    .muito-insatisfeito { background: #c00000; }
+    .insatisfeito { background: #ff0000; }
+    .razoavel { background: #ffc000; color:#000; }
+    .satisfeito { background: #92d050; color:#000; }
+    .muito-satisfeito { background: #00b050; }
+    .assinatura { height: 50px; border: 1px dashed #999; }
+  </style>
+</head>
+<body>
+ <left>
+   <img src="C:\Users\marcio.h.oliveira.t\Downloads\LOGO QUAL (1).png" alt="Logo Quality" width="1400" height="90" >
+
+
+
+
+ </left>
+  <table>
+    <tr><th colspan="4">RELATÓRIO DE ATENDIMENTO TÉCNICO</th></tr>
+    <tr>
+      <td>CLIENTE: <input type="text" name="cliente"></td>
+      <td>TICKET:# <input type="text" name="ticket"></td>
+      <td rowspan="2">TÉCNICOS:<br><textarea name="tecnicos"></textarea></td>
+      <td>
+        Atendimento:<br>
+        INÍCIO: <input type="datetime-local" name="inicio"><br>
+        TÉRMINO: <input type="datetime-local" name="termino">
+      </td>
+    </tr>
+  </table>
+
+  <table>
+    <tr><th colspan="6">CONTROLE DE INVENTÁRIO</th></tr>
+    <tr>
+      <td>EQUIPAMENTO: <input type="text" name="equipamento"></td>
+      <td>MODELO: <input type="text" name="modelo"></td>
+      <td>USUÁRIO: <input type="text" name="usuario"></td>
+    </tr>
+    <tr>
+      <td>HOSTNAME: <input type="text" name="hostname"></td>
+      <td>PATRIMÔNIO: <input type="text" name="patrimonio"></td>
+      <td>IP: <input type="text" name="ip"></td>
+      <td>MAC: <input type="text" name="mac"></td>
+    </tr>
+    <tr>
+      <td>SERIAL NUMBER: <input type="text" name="serial"></td>
+      <td>SETOR: <input type="text" name="setor"></td>
+      <td colspan="2">OBS: <input type="text" name="obs"></td>
+    </tr>
+  </table>
+
+  <table>
+    <tr><th>DESCRIÇÃO DO SERVIÇO EXECUTADO</th></tr>
+    <tr><td><textarea name="descricao" style="height:120px;"></textarea></td></tr>
+  </table>
+
+  <table>
+    <tr><th>MATERIAL UTILIZADO</th></tr>
+    <tr><td><textarea name="materiais" style="height:80px;"></textarea></td></tr>
+  </table>
+
+  <table>
+    <tr><th>OBSERVAÇÃO</th></tr>
+    <tr><td><textarea name="observacao" style="height:80px;"></textarea></td></tr>
+  </table>
+
+  <table>
+    <tr><th colspan="2">CONTROLE DE ASSINATURA</th></tr>
+    <tr>
+      <td>CLIENTE: <input type="text" name="assinatura_cliente"></td>
+      <td>ASSINATURA: <div class="assinatura"></div></td>
+    </tr>
+  </table>
+
+  <table class="satisfacao">
+    <tr><th colspan="5">PESQUISA DE SATISFAÇÃO DO ATENDIMENTO</th></tr>
+    <tr>
+      <td><label class="muito-insatisfeito">Muito insatisfeito<br>
+        <input type="radio" name="satisfacao" value="1"></label></td>
+      <td><label class="insatisfeito">Insatisfeito<br>
+        <input type="radio" name="satisfacao" value="2"></label></td>
+      <td><label class="razoavel">Razoavelmente satisfeito<br>
+        <input type="radio" name="satisfacao" value="3"></label></td>
+      <td><label class="satisfeito">Satisfeito<br>
+        <input type="radio" name="satisfacao" value="4"></label></td>
+      <td><label class="muito-satisfeito">Muito satisfeito<br>
+        <input type="radio" name="satisfacao" value="5"></label></td>
+    </tr>
+  </table>
+</body>
+</html>
