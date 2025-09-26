@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Localização e Observações para Excel</title>
+  <!-- Biblioteca para exportar Excel -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.19.3/xlsx.full.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    button { margin: 5px; padding: 8px 15px; cursor: pointer; }
+    input { padding: 6px; width: 250px; margin-right: 10px; }
+    table { border-collapse: collapse; margin-top: 15px; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background: #007BFF; color: white; }
+  </style>
+</head>
+<body>
+  <h2>📍 Captura de Localização com Observações</h2>
+
+  <p><b>Latitude:</b> <span id="lat">-</span></p>
+  <p><b>Longitude:</b> <span id="lon">-</span></p>
+  <p><b>Altitude (m):</b> <span id="alt">-</span></p>
+
+  <input type="text" id="obs" placeholder="Digite uma observação">
+  <button onclick="pegarLocal()">📌 Marcar Local</button>
+  <button onclick="salvarExcel()">💾 Salvar em Excel (.xlsx)</button>
+
+  <h3>Histórico</h3>
+  <table id="tabela">
+    <thead>
+      <tr>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Altitude (m)</th>
+        <th>Observação</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    let registros = [];
+
+    function pegarLocal() {
+      let observacao = document.getElementById("obs").value.trim();
+      if (observacao === "") {
+        alert("Digite uma observação antes de marcar o local.");
+        return;
+      }
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            let lat = pos.coords.latitude.toFixed(6);
+            let lon = pos.coords.longitude.toFixed(6);
+            let alt = pos.coords.altitude ? pos.coords.altitude.toFixed(2) : "N/D";
+
+            document.getElementById("lat").textContent = lat;
+            document.getElementById("lon").textContent = lon;
+            document.getElementById("alt").textContent = alt;
+
+            // Adiciona ao histórico
+            registros.push({ Latitude: lat, Longitude: lon, Altitude: alt, Observacao: observacao });
+            atualizarTabela(lat, lon, alt, observacao);
+
+            // limpa o campo observação
+            document.getElementById("obs").value = "";
+          },
+          (err) => alert("Erro ao obter localização: " + err.message)
+        );
+      } else {
+        alert("Seu navegador não suporta geolocalização.");
+      }
+    }
+
+    function atualizarTabela(lat, lon, alt, obs) {
+      let tbody = document.getElementById("tabela").getElementsByTagName("tbody")[0];
+      let row = tbody.insertRow();
+      row.insertCell(0).textContent = lat;
+      row.insertCell(1).textContent = lon;
+      row.insertCell(2).textContent = alt;
+      row.insertCell(3).textContent = obs;
+    }
+
+    function salvarExcel() {
+      if (registros.length === 0) {
+        alert("Nenhum local registrado.");
+        return;
+      }
+      // Converte para planilha
+      let ws = XLSX.utils.json_to_sheet(registros);
+      let wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Localizações");
+
+      // Salva como arquivo .xlsx
+      XLSX.writeFile(wb, "localizacoes.xlsx");
+    }
+  </script>
+</body>
+</html>
